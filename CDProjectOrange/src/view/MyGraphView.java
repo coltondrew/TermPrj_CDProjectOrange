@@ -40,7 +40,7 @@ import util.UtilMsg;
 import util.UtilNode;
 
 public class MyGraphView {
-   public static final String VIEW_ID = "project1106-node-color-Drew.partdescriptor.simplezestview5";
+   public static final String VIEW_ID = "CDProjectOrange.partdescriptor.simplezestview5";
 
    private GraphViewer gViewer;
    private int layout = 0;
