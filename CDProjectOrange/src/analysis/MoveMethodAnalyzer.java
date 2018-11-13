@@ -88,12 +88,12 @@ public class MoveMethodAnalyzer {
       for (ICompilationUnit iCUnit : iCompilationUnits) {
          CompilationUnit compUnit = parse(iCUnit);
 
-         /* TODO: Term Project
+         // TODO: Term Project
          
          ASTVisitor visitor = new ASTVisitor() {
             public boolean visit(TypeDeclaration typeDecl) {
                if (checkDst(typeDecl)) {
-                  * Your Answer * = (IType) typeDecl.resolveBinding().getJavaElement();
+            	   typeMoveDest = (IType) typeDecl.resolveBinding().getJavaElement();
                   iCUnitMoveDest = iCUnit;
                }
                return true;
@@ -108,7 +108,7 @@ public class MoveMethodAnalyzer {
 
             public boolean visit(MethodDeclaration methodDecl) {
                if (eqSrc(methodDecl)) {
-                  * Your Answer * = (IMethod) methodDecl.resolveBinding().getJavaElement();
+            	   methodElemToBeMoved = (IMethod) methodDecl.resolveBinding().getJavaElement();
                   iCUnitToBeMovedMethod = iCUnit;
                }
                return true;
@@ -121,7 +121,7 @@ public class MoveMethodAnalyzer {
                return cur.equals(src);
             }
          };
-         * Your Answer *.accept(* Your Answer *); */
+         compUnit.accept(visitor);
       }
    }
 
