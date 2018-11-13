@@ -142,15 +142,15 @@ public class MoveMethodAnalyzer {
    }
 
    public void moveMethod() {
-      /* TODO: Term Project
+      /* TODO: Term Project*/
       if (this.methodToBeMoved.getNodeType().equals(GNodeType.UserSelection) && //
             this.classMoveDestination.getNodeType().equals(GNodeType.UserDoubleClicked)) {
          System.out.println("-> " + this.methodElemToBeMoved.getPath() + "." + this.methodElemToBeMoved.getElementName());
          System.out.println("-> " + this.typeMoveDest.getFullyQualifiedName());
          try {
          
-            See https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fjdt%2Fcore%2FIMethod.html
-            methodElemToBeMoved.move(* Your Answer *, null, null, false, null);
+            //See https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fjdt%2Fcore%2FIMethod.html
+            methodElemToBeMoved.move(typeMoveDest, null, null, false, null);
             
             UtilPlatform.indentAndSave(iCUnitToBeMovedMethod);
             UtilPlatform.indentAndSave(iCUnitMoveDest);
@@ -159,7 +159,7 @@ public class MoveMethodAnalyzer {
          }
       } else {
          System.out.println("[DBG] Please select class and method nodes to move.");
-      } */
+      }
       UtilMsg.openWarning("TODO: should implement it as a part of the term project.");
    }
 }
