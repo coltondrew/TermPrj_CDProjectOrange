@@ -4,10 +4,10 @@
     <elements xsi:type="commands:Command" xmi:id="_2gK34L46EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.command.viewastnodes" commandName="View AST Nodes"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_rRyT4L46EeWS1vppwIGIuQ" featurename="handlers" parentElementId="org.eclipse.e4.legacy.ide.application">
-    <elements xsi:type="commands:Handler" xmi:id="_7WE24L46EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.handler.0" contributionURI="bundleclass://project1106-node-color-Drew/handler.ASTZestHandler" command="_2gK34L46EeWS1vppwIGIuQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_7WE24L46EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.handler.0" contributionURI="bundleclass://CDProjectOrange/handler.ASTZestHandler" command="_2gK34L46EeWS1vppwIGIuQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_qS0xQL46EeWS1vppwIGIuQ" featurename="descriptors" parentElementId="org.eclipse.e4.legacy.ide.application">
-    <elements xsi:type="basic:PartDescriptor" xmi:id="_x0-UEL46EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.partdescriptor.simplezestview5" label="Simple Zest View 5 - Move Method" iconURI="platform:/plugin/project1106-node-color-Drew/icons/sample.png" contributionURI="bundleclass://project1106-node-color-Drew/view.MyGraphView"/>
+    <elements xsi:type="basic:PartDescriptor" xmi:id="_x0-UEL46EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.partdescriptor.simplezestview5" label="Simple Zest View 5 - Move Method" iconURI="platform:/plugin/CDProjectOrange/icons/sample.png" contributionURI="bundleclass://CDProjectOrange/view.MyGraphView"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_r6cPUL46EeWS1vppwIGIuQ" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
     <elements xsi:type="menu:MenuContribution" xmi:id="_DithIL47EeWS1vppwIGIuQ" elementId="project1106-node-color-Drew.menucontribution.0" positionInParent="after=window" parentId="org.eclipse.ui.main.menu">
