@@ -40,7 +40,7 @@ import util.UtilMsg;
 import util.UtilNode;
 
 public class MyGraphView {
-   public static final String VIEW_ID = "CDProjectOrange.partdescriptor.simplezestview5";
+   public static final String VIEW_ID = "CDProjectOrange.partdescriptor.simplezestview";
 
    private GraphViewer gViewer;
    private int layout = 0;
@@ -69,7 +69,7 @@ public class MyGraphView {
       gViewer.getControl().setMenu(mPopupMenu);
 
       menuItemMoveMethod = new MenuItem(mPopupMenu, SWT.CASCADE);
-      menuItemMoveMethod.setText("Move Method");
+      menuItemMoveMethod.setText("Clone");
       addSelectionListenerMenuItemMoveMethod();
 
       menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
