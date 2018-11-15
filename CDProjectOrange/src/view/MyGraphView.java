@@ -69,12 +69,15 @@ public class MyGraphView {
       gViewer.getControl().setMenu(mPopupMenu);
 
       menuItemMoveMethod = new MenuItem(mPopupMenu, SWT.CASCADE);
-      menuItemMoveMethod.setText("Clone");
+      menuItemMoveMethod.setText("Move Method");
       addSelectionListenerMenuItemMoveMethod();
 
       menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
       menuItemRefresh.setText("Refresh");
       addSelectionListenerMenuItemRefresh();
+      
+      menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
+      menuItemRefresh.setText("Clone");
    }
 
    private void addMouseListenerGraphViewer() {
