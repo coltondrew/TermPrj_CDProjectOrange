@@ -45,7 +45,7 @@ public class MyGraphView {
    private GraphViewer gViewer;
    private int layout = 0;
    private Menu mPopupMenu = null;
-   private MenuItem menuItemMoveMethod = null, menuItemRefresh = null;
+   private MenuItem menuItemMoveMethod = null, menuItemRefresh = null, openNodeView = null;
    private GraphNode selectedSrcGraphNode = null, selectedDstGraphNode = null;
    private GraphNode prevSelectedDstGraphNode = null;
 
@@ -71,6 +71,10 @@ public class MyGraphView {
       menuItemMoveMethod = new MenuItem(mPopupMenu, SWT.CASCADE);
       menuItemMoveMethod.setText("Move Method");
       addSelectionListenerMenuItemMoveMethod();
+      
+      openNodeView = new MenuItem(mPopupMenu, SWT.CASCADE);
+      openNodeView.setText("Open Node in New View");
+      addSelectionListenerNewNodeView();
 
       menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
       menuItemRefresh.setText("Refresh");
@@ -214,6 +218,21 @@ public class MyGraphView {
       menuItemRefresh.addSelectionListener(menuItemListenerRefresh);
    }
 
+   private void addSelectionListenerNewNodeView() {
+	      SelectionListener menuItemListenerRefresh = new SelectionListener() {
+	         @Override
+	         public void widgetSelected(SelectionEvent e) {
+	            System.out.println("[DBG] MenuItem Refresh");
+	            syncZestViewAndJavaEditor();
+	         }
+
+	         @Override
+	         public void widgetDefaultSelected(SelectionEvent e) {
+	         }
+	      };
+	      menuItemRefresh.addSelectionListener(menuItemListenerRefresh);
+	   }
+ 
    private void resetSelectedSrcGraphNode() {
       if (selectedSrcGraphNode != null && selectedSrcGraphNode.isDisposed() == false) {
          selectedSrcGraphNode.setBorderWidth(0);
