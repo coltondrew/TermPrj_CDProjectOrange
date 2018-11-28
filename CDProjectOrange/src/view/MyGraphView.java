@@ -45,7 +45,7 @@ public class MyGraphView {
    private GraphViewer gViewer;
    private int layout = 0;
    private Menu mPopupMenu = null;
-   private MenuItem menuItemMoveMethod = null, menuItemRefresh = null, openNodeView = null;
+   private MenuItem menuItemMoveMethod = null, menuItemRefresh = null, menuOpenNodeView = null, menuClone;
    private GraphNode selectedSrcGraphNode = null, selectedDstGraphNode = null;
    private GraphNode prevSelectedDstGraphNode = null;
 
@@ -72,16 +72,16 @@ public class MyGraphView {
       menuItemMoveMethod.setText("Move Method");
       addSelectionListenerMenuItemMoveMethod();
       
-      openNodeView = new MenuItem(mPopupMenu, SWT.CASCADE);
-      openNodeView.setText("Open Node in New View");
+      menuOpenNodeView = new MenuItem(mPopupMenu, SWT.CASCADE);
+      menuOpenNodeView.setText("Open Node in New View");
       addSelectionListenerNewNodeView();
 
       menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
       menuItemRefresh.setText("Refresh");
       addSelectionListenerMenuItemRefresh();
       
-      menuItemRefresh = new MenuItem(mPopupMenu, SWT.CASCADE);
-      menuItemRefresh.setText("Clone");
+      menuClone = new MenuItem(mPopupMenu, SWT.CASCADE);
+      menuClone.setText("Clone");
    }
 
    private void addMouseListenerGraphViewer() {
