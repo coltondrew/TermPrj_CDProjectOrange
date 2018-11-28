@@ -222,15 +222,18 @@ public class MyGraphView {
 	      SelectionListener menuItemListenerNodeView = new SelectionListener() {
 	         @Override
 	         public void widgetSelected(SelectionEvent e) {
-	            System.out.println("[DBG] MenuItem Refresh");
-	            syncZestViewAndJavaEditor();
+	            System.out.println("[DBG] MenuItem View Node");
+	            if(selectedGMethodNode != null) {
+	            	System.out.println(((GMethodNode) selectedGMethodNode).getClassName());
+	            	System.out.println(((GMethodNode) selectedGMethodNode).getPkgName());
+	            }
 	         }
 
 	         @Override
 	         public void widgetDefaultSelected(SelectionEvent e) {
 	         }
 	      };
-	      menuItemRefresh.addSelectionListener(menuItemListenerNodeView);
+	      menuOpenNodeView.addSelectionListener(menuItemListenerNodeView);
 	   }
  
    private void resetSelectedSrcGraphNode() {
