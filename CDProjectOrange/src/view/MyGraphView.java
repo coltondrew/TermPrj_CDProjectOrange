@@ -219,7 +219,7 @@ public class MyGraphView {
    }
 
    private void addSelectionListenerNewNodeView() {
-	      SelectionListener menuItemListenerRefresh = new SelectionListener() {
+	      SelectionListener menuItemListenerNodeView = new SelectionListener() {
 	         @Override
 	         public void widgetSelected(SelectionEvent e) {
 	            System.out.println("[DBG] MenuItem Refresh");
@@ -230,7 +230,7 @@ public class MyGraphView {
 	         public void widgetDefaultSelected(SelectionEvent e) {
 	         }
 	      };
-	      menuItemRefresh.addSelectionListener(menuItemListenerRefresh);
+	      menuItemRefresh.addSelectionListener(menuItemListenerNodeView);
 	   }
  
    private void resetSelectedSrcGraphNode() {
