@@ -28,6 +28,7 @@ import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 
 import analysis.MoveMethodAnalyzer;
 import analysis.ProjectAnalyzer;
+import analysis.ViewNodeAnalyzer;
 import graph.model.GClassNode;
 import graph.model.GMethodNode;
 import graph.model.GNode;
@@ -226,6 +227,12 @@ public class MyGraphView {
 	            if(selectedGMethodNode != null) {
 	            	System.out.println(((GMethodNode) selectedGMethodNode).getClassName());
 	            	System.out.println(((GMethodNode) selectedGMethodNode).getPkgName());
+	            	ViewNodeAnalyzer nodeAnalyzer = new ViewNodeAnalyzer();
+	            	nodeAnalyzer.setPkgNode(((GMethodNode) selectedGMethodNode).getPkgName());
+	            	nodeAnalyzer.setClassNode(((GMethodNode) selectedGMethodNode).getClassName());
+	            	nodeAnalyzer.setMethodNode(((GMethodNode) selectedGMethodNode).getName());
+	            	nodeAnalyzer.analyze();
+	            	gViewer.setInput(GModelProvider.instance().getNodes());
 	            }
 	         }
 
