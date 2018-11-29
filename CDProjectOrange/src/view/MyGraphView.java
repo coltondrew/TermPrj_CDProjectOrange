@@ -83,7 +83,7 @@ public class MyGraphView {
       addSelectionListenerNewNodeView();
       
       menuClone = new MenuItem(mPopupMenu, SWT.CASCADE);
-      menuClone.setText("Clone");
+      menuClone.setText("Clone Method");
       addSelectionListenerMenuItemClone();
    }
 

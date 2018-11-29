@@ -164,6 +164,5 @@ public class CloneAnalyzer {
       } else {
          System.out.println("[DBG] Please select class and method nodes to clone.");
       }
-      UtilMsg.openWarning("The method has been successfully moved.");
    }
 }
