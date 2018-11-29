@@ -41,7 +41,7 @@ public class CloneAnalyzer {
    private GClassNode classMoveDestination;
    private IMethod methodElemToBeMoved;
    private IType typeMoveDest;
-   private ICompilationUnit iCUnitToBeMovedMethod, iCUnitMoveDest;
+   private ICompilationUnit iCUnitToBeMovedMethod;
 
    public CloneAnalyzer() {
    }
@@ -95,7 +95,7 @@ public class CloneAnalyzer {
             	if(methodToBeCloned.getClassName().equals(typeDecl.resolveBinding().getName())){
                 	System.out.println(methodToBeCloned.getPkgName());
                 	typeMoveDest = (IType) typeDecl.resolveBinding().getJavaElement();
-                	iCUnitMoveDest = iCUnit;
+
             	}
                return true;
             }
@@ -147,16 +147,20 @@ public class CloneAnalyzer {
       if (this.methodToBeCloned.getNodeType().equals(GNodeType.UserSelection)) {
          System.out.println("-> " + this.methodElemToBeMoved.getPath() + "." + this.methodElemToBeMoved.getElementName());
          System.out.println("-> " + this.typeMoveDest.getFullyQualifiedName());
-         try {
-        	 String cloneName = this.methodElemToBeMoved.getElementName();
-        	 cloneName = cloneName + "2";
-            //See https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fjdt%2Fcore%2FIMethod.html
-        	methodElemToBeMoved.copy(typeMoveDest, null, cloneName, false, null);
+    	 String cloneName = this.methodElemToBeMoved.getElementName();
+    	 int num = 1;
+    	 boolean done = false;
+    	 while(!done) {
+    		 try {
+    			 //See https://help.eclipse.org/oxygen/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fapi%2Forg%2Feclipse%2Fjdt%2Fcore%2FIMethod.html
+    			 methodElemToBeMoved.copy(typeMoveDest, null, cloneName + num, false, null);
             
-            UtilPlatform.indentAndSave(iCUnitToBeMovedMethod);
-         } catch (JavaModelException e) {
-            e.printStackTrace();
-         }
+    			 UtilPlatform.indentAndSave(iCUnitToBeMovedMethod);
+    			 done = true;
+    		 } catch (JavaModelException e) {
+    			 num++;
+    		 }
+    	 }
       } else {
          System.out.println("[DBG] Please select class and method nodes to clone.");
       }

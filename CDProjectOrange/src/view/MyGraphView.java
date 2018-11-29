@@ -48,7 +48,7 @@ public class MyGraphView {
    private int layout = 0;
    private Menu mPopupMenu = null;
    private MenuItem menuItemMoveMethod = null, menuItemRefresh = null, menuOpenNodeView = null, menuClone = null;
-   private GraphNode selectedSrcGraphNode = null, selectedDstGraphNode = null;
+   private GraphNode selectedSrcGraphNode = null, selectedDstGraphNode = null, lastSelectedGraphNode = null;
    private GraphNode prevSelectedDstGraphNode = null;
 
    private GNode selectedGMethodNode = null, selectedGClassNode = null, selectedGPackageNode = null, lastSelectedNode = null;
@@ -107,15 +107,15 @@ public class MyGraphView {
                lastSelectedNode.setNodeType(GNodeType.UserSelection);
             }
             else if(UtilNode.isClassNode(e)) {
-            	selectedDstGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
+            	lastSelectedGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
             	
-            	lastSelectedNode = (GClassNode) selectedSrcGraphNode.getData();
+            	lastSelectedNode = (GClassNode) lastSelectedGraphNode.getData();
                 lastSelectedNode.setNodeType(GNodeType.UserSelection);
             }
             else if(UtilNode.isPackageNode(e)) {
-            	selectedDstGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
+            	lastSelectedGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
             	
-            	lastSelectedNode = (GPackageNode) selectedSrcGraphNode.getData();
+            	lastSelectedNode = (GPackageNode) lastSelectedGraphNode.getData();
                 lastSelectedNode.setNodeType(GNodeType.UserSelection);
             }
          }
