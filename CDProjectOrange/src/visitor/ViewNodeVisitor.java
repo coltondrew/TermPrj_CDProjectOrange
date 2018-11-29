@@ -124,7 +124,7 @@ public class ViewNodeVisitor extends ASTVisitor {
 		ITypeBinding typeBinding = rBinding.getDeclaringClass();
 		String prjName = typeBinding.getPackage().getJavaElement().getJavaProject().getElementName();
 		String pkgName = typeBinding.getPackage().getName();
-		String varName = varDecl.getName().getFullyQualifiedName();
+		String varName = varDecl.getName().getFullyQualifiedName() + ":" + pkgName + "." + className;
 		String parent = prjName + "." + pkgName + "." + className + "." + methodName;
 		String id = parent + "." + methodName + "." + varName;
 		GVariableNode n = new GVariableNode(id, varName, parent);
