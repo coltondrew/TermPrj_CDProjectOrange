@@ -11,19 +11,23 @@ import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
+import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import graph.model.GClassNode;
 import graph.model.GConnection;
 import graph.model.GMethodNode;
 import graph.model.GNode;
 import graph.model.GPackageNode;
+import graph.model.GVariableNode;
 import graph.provider.GModelProvider;
 
 public class ViewNodeVisitor extends ASTVisitor {
-
+	private String prjName;
+	private String pkgName;
 	private String className;
 	private String methodName;
 
@@ -100,6 +104,33 @@ public class ViewNodeVisitor extends ASTVisitor {
 		n.setPrjName(prjName).setPkgName(pkgName).setClassName(className);
 		return addNode(n);
 	}
+	
+	@Override
+	public boolean visit(VariableDeclarationFragment node) {
+		GNode varNode = insertVariableNode(node);
+		GNode methodNode = GModelProvider.instance().getNodeMap().get(varNode.getParent());
+		if (methodNode == null) {
+			System.out.println(varNode.getParent());
+			return false;		
+		}
+		System.out.println("Creating Connection");
+		addConnection(varNode, methodNode, node.getStartPosition());
+		return super.visit(node);
+	}
+	
+	private GNode insertVariableNode(VariableDeclarationFragment varDecl) {
+		IVariableBinding vBinding = varDecl.resolveBinding();
+		IMethodBinding rBinding = vBinding.getDeclaringMethod();
+		ITypeBinding typeBinding = rBinding.getDeclaringClass();
+		String prjName = typeBinding.getPackage().getJavaElement().getJavaProject().getElementName();
+		String pkgName = typeBinding.getPackage().getName();
+		String varName = varDecl.getName().getFullyQualifiedName();
+		String parent = prjName + "." + pkgName + "." + className + "." + methodName;
+		String id = parent + "." + methodName + "." + varName;
+		GVariableNode n = new GVariableNode(id, varName, parent);
+		n.setPrjName(prjName).setPkgName(pkgName).setClassName(className).setMethodName(methodName);
+		return addNode(n);
+}
 
 	private void addConnection(GNode srcNode, GNode dstNode, int offset) {
 		String conId = srcNode.getId() + dstNode.getId();
