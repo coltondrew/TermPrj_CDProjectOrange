@@ -92,8 +92,11 @@ public class CloneAnalyzer {
          
          ASTVisitor visitor = new ASTVisitor() {
             public boolean visit(TypeDeclaration typeDecl) {
-            	   typeMoveDest = (IType) typeDecl.resolveBinding().getJavaElement();
-                  iCUnitMoveDest = iCUnit;
+            	if(methodToBeCloned.getClassName().equals(typeDecl.resolveBinding().getName())){
+                	System.out.println(methodToBeCloned.getPkgName());
+                	typeMoveDest = (IType) typeDecl.resolveBinding().getJavaElement();
+                	iCUnitMoveDest = iCUnit;
+            	}
                return true;
             }
 
@@ -151,7 +154,6 @@ public class CloneAnalyzer {
         	methodElemToBeMoved.copy(typeMoveDest, null, cloneName, false, null);
             
             UtilPlatform.indentAndSave(iCUnitToBeMovedMethod);
-            UtilPlatform.indentAndSave(iCUnitMoveDest);
          } catch (JavaModelException e) {
             e.printStackTrace();
          }

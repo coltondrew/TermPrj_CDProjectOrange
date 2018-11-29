@@ -263,8 +263,11 @@ public class MyGraphView {
 	      SelectionListener menuItemListenerClone = new SelectionListener() {
 	         @Override
 	         public void widgetSelected(SelectionEvent e) {
-	            System.out.println("[DBG] MenuItem Clone");
 	            CloneAnalyzer cloneAnalyzer = new CloneAnalyzer();
+	            if (lastSelectedNode instanceof GMethodNode) {
+	            	System.out.println("[DBG] MenuItem Clone Method");
+	            	cloneAnalyzer.setMethodToBeCloned((GMethodNode) selectedGMethodNode);
+	            }
 	            cloneAnalyzer.setMethodToBeCloned((GMethodNode) selectedGMethodNode);
 	            cloneAnalyzer.analyze();
 	            cloneAnalyzer.cloneMethod();
