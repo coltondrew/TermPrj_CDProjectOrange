@@ -26,6 +26,7 @@ import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 
+import analysis.CloneAnalyzer;
 import analysis.MoveMethodAnalyzer;
 import analysis.ProjectAnalyzer;
 import analysis.ViewNodeAnalyzer;
@@ -50,7 +51,7 @@ public class MyGraphView {
    private GraphNode selectedSrcGraphNode = null, selectedDstGraphNode = null;
    private GraphNode prevSelectedDstGraphNode = null;
 
-   private GNode selectedGMethodNode = null, selectedGClassNode = null, selectedGPackageNode = null;
+   private GNode selectedGMethodNode = null, selectedGClassNode = null, selectedGPackageNode = null, lastSelectedNode = null;
    private GNode prevSelectedGClassNode = null, prevSelectedGPackageNode = null;
 
    @PostConstruct
@@ -83,6 +84,7 @@ public class MyGraphView {
       
       menuClone = new MenuItem(mPopupMenu, SWT.CASCADE);
       menuClone.setText("Clone");
+      addSelectionListenerMenuItemClone();
    }
 
    private void addMouseListenerGraphViewer() {
@@ -100,6 +102,21 @@ public class MyGraphView {
 
                selectedGMethodNode = (GMethodNode) selectedSrcGraphNode.getData();
                selectedGMethodNode.setNodeType(GNodeType.UserSelection);
+               
+               lastSelectedNode = (GMethodNode) selectedSrcGraphNode.getData();
+               lastSelectedNode.setNodeType(GNodeType.UserSelection);
+            }
+            else if(UtilNode.isClassNode(e)) {
+            	selectedDstGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
+            	
+            	lastSelectedNode = (GClassNode) selectedSrcGraphNode.getData();
+                lastSelectedNode.setNodeType(GNodeType.UserSelection);
+            }
+            else if(UtilNode.isPackageNode(e)) {
+            	selectedDstGraphNode = (GraphNode) ((Graph) e.getSource()).getSelection().get(0);
+            	
+            	lastSelectedNode = (GPackageNode) selectedSrcGraphNode.getData();
+                lastSelectedNode.setNodeType(GNodeType.UserSelection);
             }
          }
 
@@ -241,6 +258,31 @@ public class MyGraphView {
 	         }
 	      };
 	      menuOpenNodeView.addSelectionListener(menuItemListenerNodeView);
+	   }
+   private void addSelectionListenerMenuItemClone() {
+	      SelectionListener menuItemListenerClone = new SelectionListener() {
+	         @Override
+	         public void widgetSelected(SelectionEvent e) {
+	            System.out.println("[DBG] MenuItem Clone");
+	            CloneAnalyzer cloneAnalyzer = new CloneAnalyzer();
+	            cloneAnalyzer.setMethodToBeCloned((GMethodNode) selectedGMethodNode);
+	            cloneAnalyzer.analyze();
+	            cloneAnalyzer.cloneMethod();
+	            resetSelectedSrcGraphNode();
+	            UtilNode.resetDstNode(selectedDstGraphNode, selectedGClassNode);
+	            syncZestViewAndJavaEditor();
+	         }
+
+	         private boolean isNodesSelected() {
+	            return selectedGMethodNode != null && selectedGMethodNode.getNodeType().equals(GNodeType.UserSelection) && //
+	            selectedGClassNode != null && selectedGClassNode.getNodeType().equals(GNodeType.UserDoubleClicked);
+	         }
+
+	         @Override
+	         public void widgetDefaultSelected(SelectionEvent e) {
+	         }
+	      };
+	      menuClone.addSelectionListener(menuItemListenerClone);
 	   }
  
    private void resetSelectedSrcGraphNode() {
